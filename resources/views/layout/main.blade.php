@@ -1,15 +1,4 @@
-{{-- <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset=" UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/style.css">
-        <title>Travel | Home</title>
-    </head>
-    <body>
-        <h1> Halaman Home </h1>
-    </body>
-</html> --}}
+
 
 <!doctype html>
 <html lang="en">
@@ -21,14 +10,17 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
+    
+
     <title>Travel | {{ $title }}</title>
   </head>
-  <body>
+  <body style="background-color: #CBCDC1">
     
     @include('partials.navbar')
+    
 
 
-    <div class="container mt-4">
+    <div class="container mt-4 mb-5">
         @yield('container')
     </div>
 
