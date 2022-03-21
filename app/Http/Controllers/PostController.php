@@ -10,8 +10,9 @@ class PostController extends Controller
     public function index()
     {
         return view('posts', [
-            "title" => "Blog",
-            "post" => \App\Models\Post::all()
+            "title" => "All Posts",
+            "posts" => \App\Models\Post::latest()->get(),
+            // "post" => \App\Models\Post::all()
         ]);
     }
 
