@@ -8,6 +8,7 @@ use function PHPSTORM_META\map;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\HotelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,7 @@ Route::get('/', function () {
         "image1" => "1.png",
         "image2" => "2.png",
         "image3" => "3.png",
-        
+
     ]);
 });
 
@@ -44,7 +45,7 @@ Route::get('/about', function () {
 
 
 
-Route::get('/posts',[PostController::class, 'index']);
+Route::get('/posts', [PostController::class, 'index']);
 // halaman single post
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
@@ -65,3 +66,8 @@ Route::get('/categories/{category:slug}', function (Category $category) {
 });
 
 Route::get('/login', [LoginController::class, 'index']);
+
+
+// Route Hotel
+
+Route::get('Hotel', [HotelController::class, 'index'])->name('Hotel.mainhotel');
