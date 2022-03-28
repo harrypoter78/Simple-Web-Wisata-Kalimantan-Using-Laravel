@@ -36,7 +36,7 @@
   <div class="album py-5 bg-light">
     <div class="container"  >
 
-      <div class="row row-cols-1 row-cols-sm-2 g-4" style="color: aqua">
+      <div class="row row-cols-1 row-cols-sm-2 g-4" >
         @foreach ($categories as $category)
         <div class="col">
           <div class="card shadow-sm d-flex justify-content-center">
