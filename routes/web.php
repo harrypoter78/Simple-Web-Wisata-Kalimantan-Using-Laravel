@@ -70,4 +70,4 @@ Route::get('/login', [LoginController::class, 'index']);
 
 // Route Hotel
 
-Route::get('Hotel', [HotelController::class, 'index'])->name('Hotel.mainhotel');
+Route::get('Hotel', [HotelController::class, 'index'])->name('Hotel.list-hotel');

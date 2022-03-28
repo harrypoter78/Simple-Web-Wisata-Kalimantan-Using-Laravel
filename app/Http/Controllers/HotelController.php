@@ -13,7 +13,7 @@ class HotelController extends Controller
      */
     public function index()
     {
-        return view('Hotel.mainhotel');
+        return view('Hotel.list-hotel');
     }
 
     /**

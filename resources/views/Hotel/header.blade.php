@@ -45,34 +45,37 @@
 <body>
     <div id="app">
         <div class="main-wrapper">
-            <div class="card">
+            <div class="card" style="color: transparent">
                 <nav class="navbar navbar-expand-lg bg-primary">
-                    <a class="navbar-brand" href="#">My App</a>
+                    <a class="navbar-brand" href="#">Travel</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-
-                    <ul class="navbar-nav navbar-right">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/">Beranda</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
+                            <a class="nav-link" href="/about">Tentang</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Disabled</a>
+                            <a class="nav-link" href="#">Kontak</a>
                         </li>
                     </ul>
-                </nav>
             </div>
+            </nav>
         </div>
     </div>
+    </div>
 
-    <footer class="main-footer">
+    <div class="main-content">
+        <section class="section">
+            @yield('container')
+        </section>
+    </div>
+
+    <footer class="main-footer" style="color: #CBCDC1;">
 
         <div class="footer-left">
             Copyright &copy; 2021 <div class="bullet"></div> <a href=""></a>
