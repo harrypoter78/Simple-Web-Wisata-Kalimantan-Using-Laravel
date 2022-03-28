@@ -7,13 +7,13 @@
     <div class="col-md-8">
       
       <article class="blog-post">
-        <h2 class="blog-post-title">{{ $post->title }}</h2>
-        <p class="blog-post-meta"> Wisata <a href="/categories/{{ $post->category->slug }}" class="text-decoration-none">{{
+        <h2 class="blog-post-title" style="font-family: 'Mulish', sans-serif;">{{ $post->title }}</h2>
+        <p class="blog-post-meta" style="font-family: 'Mulish', sans-serif;"> Wisata <a href="/categories/{{ $post->category->slug }}" class="text-decoration-none">{{
             $post ->category->name }}</a> Kalimantan - <small> {{ $post->created_at->diffForHumans() }}</small></p>
 
         {{-- <img src="https://source.unsplash.com/1200x500?mountain,city" alt="" class="img-fluid mb-3"> --}}
 
-        <div id="carouselExampleControls" class="carousel slide mb-3" data-bs-ride="carousel" style="">
+        <div id="carouselExampleControls" class="carousel slide mb-3" data-bs-ride="carousel" style="font-family: 'Mulish', sans-serif;">
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <img src="https://source.unsplash.com/1200x500?mountain,city" class="d-block w-100" alt="...">
@@ -35,21 +35,24 @@
             </button>
           </div>
         
-        {!! $post->body !!}
+          <div style="font-family: 'Mulish', sans-serif;">  {!! $post->body !!}</div>
+       
         
       </article>
 
   
     </div>
   
-    <div class="col-md-4">
+    <div class="col-md-4" style="font-family: 'Mulish', sans-serif;">
       <div class="position-sticky" style="top: 2rem;">
-        <div class="p-4 mb-3 bg-light rounded">
+        <div class="p-4 mb-3 rounded " style="border: 1px solid black;
+        border-bottom-left-radius: 25px;">
           <h4 class="fst-italic">Alamat</h4>
           <p class="mb-0">Customize this section to tell your visitors a little bit about your publication, writers, content, or something else entirely. Totally up to you.</p>
         </div>
-  
-        <div class="p-4">
+
+        <div class="p-4 mb-3 rounded " style="border: 1px groove black;
+        border-bottom-left-radius: 25px;">
           <h4 class="fst-italic">Kategori Wisata</h4>
           <ol class="list-unstyled mb-0">
             <li><a href="#">Kota</a></li>
@@ -57,8 +60,10 @@
             <li><a href="#">Kuliner</a></li>
           </ol>
         </div>
+        
   
-        <div class="p-4">
+  
+        <div class="p-4" style="font-family: 'Mulish', sans-serif;">
           <h4 class="fst-italic">Sosial Media</h4>
           <ol class="list-unstyled">
             <li><a href="#">Instagram</a></li>
