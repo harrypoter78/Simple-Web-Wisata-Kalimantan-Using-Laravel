@@ -37,18 +37,45 @@
     <div class="container"  >
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-sm-3 g-3"  >
-        @foreach ($categories as $category)
         <div class="col">
           <div class="card shadow-sm d-flex justify-content-center">
-            {{-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" src="https://source.unsplash.com/1200x500?nature,city" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> --}}
-            <img  src="https://source.unsplash.com/1200x500?mountain,city" style="height: 430; color-img"  >
+            <img  src="image/{{ $image1 }}" style="height: 430; color-img"  >
             <div class="card-img-overlay d-flex align-items-center" style="background-color: rgba(0,0,0,0.5) ">
-              <p class="card-title fs-1 text-center flex-fill " style="font-family: 'Mulish', sans-serif;"><a class="text-decoration-none  text-white" href="/categories/{{ $category->slug }}" class=" "> {{ $category->name }}</a></p>
-              {{-- <p class="card-text text-white mt-0">KALIMANTAN</p> --}}
+              <p class="card-title fs-1 text-center flex-fill " style="font-family: 'Mulish', sans-serif;"><a class="text-decoration-none  text-white" href="/categories/{{ $categories[0]->slug }}" class=" "> {{ $categories[0]->name }}</a></p>
             </div>
           </div>
         </div>
-        @endforeach
+
+        <div class="col">
+          <div class="card shadow-sm d-flex justify-content-center">
+            <img  src="image/{{ $image2 }}" style="height: 430; color-img"  >
+            <div class="card-img-overlay d-flex align-items-center" style="background-color: rgba(0,0,0,0.5) ">
+              <p class="card-title fs-1 text-center flex-fill " style="font-family: 'Mulish', sans-serif;"><a class="text-decoration-none  text-white" href="/categories/{{ $categories[1]->slug }}" class=" "> {{ $categories[1]->name }}</a></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card shadow-sm d-flex justify-content-center">
+            <img  src="image/{{ $image3 }}" style="height: 430; color-img"  >
+            <div class="card-img-overlay d-flex align-items-center" style="background-color: rgba(0,0,0,0.5) ">
+              <p class="card-title fs-1 text-center flex-fill " style="font-family: 'Mulish', sans-serif;"><a class="text-decoration-none  text-white" href="/categories/{{ $categories[2]->slug }}" class=" "> {{ $categories[2]->name }}</a></p>
+            </div>
+          </div>
+        </div>
+        
+
+
+        {{-- @foreach ($categories as $category)
+        <div class="col">
+          <div class="card shadow-sm d-flex justify-content-center">
+            <img  src="https://source.unsplash.com/1200x500?mountain,city" style="height: 430; color-img"  >
+            <div class="card-img-overlay d-flex align-items-center" style="background-color: rgba(0,0,0,0.5) ">
+              <p class="card-title fs-1 text-center flex-fill " style="font-family: 'Mulish', sans-serif;"><a class="text-decoration-none  text-white" href="/categories/{{ $category->slug }}" class=" "> {{ $category->name }}</a></p>
+            </div>
+          </div>
+        </div>
+        @endforeach --}}
 
       </div>
     </div>

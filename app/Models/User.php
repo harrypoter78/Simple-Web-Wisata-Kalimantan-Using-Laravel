@@ -17,13 +17,10 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    public $primaryKey = 'users_id';
     protected $fillable = [
-        'users_first_name',
-        'users_last_name',
-        'users_email',
-        'users_password',
-        'users_role'
+        'name',
+        'email',
+        'password',
     ];
 
     /**
@@ -35,7 +32,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-    
 
     /**
      * The attributes that should be cast.
@@ -43,21 +39,11 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        //'email_verified_at' => 'datetime',
+        'email_verified_at' => 'datetime',
     ];
 
-    public function hasRole(string $role): bool
+    public function posts()
     {
-        return $this->getAttribute('users_role') === $role;
-    }
-
-    public function hasPermission(int $id): bool
-    {
-        return $this->getAttribute('users_id') == $id;
-    }
-
-    public function nothasPermission(int $id): bool
-    {
-        return $this->getAttribute('users_id') != $id;
+        return $this->hasMany(Post::class);
     }
 }

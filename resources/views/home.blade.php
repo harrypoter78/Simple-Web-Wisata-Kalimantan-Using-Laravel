@@ -1,7 +1,6 @@
 @extends('layout.main')
 
 @section('container')
-
 @endsection
 <div class="carousel-item active ">
   <img src="image/{{ $image3 }}" class=" w-100" style=" height: 720px;" alt="..">

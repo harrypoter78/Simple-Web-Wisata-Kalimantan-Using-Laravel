@@ -8,6 +8,7 @@ use function PHPSTORM_META\map;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,7 @@ Route::get('/', function () {
         "title" => "Beranda",
         "image1" => "1.png",
         "image2" => "2.png",
-        "image3" => "3.png",
+        "image3" => "3.jpeg",
         
     ]);
 });
@@ -37,8 +38,7 @@ Route::get('/about', function () {
         "title" => "Tentang",
         "name" => "reza",
         "email" => "muhammaddwiki01@gmail.com",
-        "image1" => "alam.jpeg",
-        "image2" => "kota.jpeg"
+        "image1" => "1.png",
     ]);
 });
 
@@ -51,7 +51,10 @@ Route::get('posts/{post:slug}', [PostController::class, 'show']);
 Route::get('/categories', function () {
     return view('categories', [
         'title' => 'Post Categories',
-        'categories' => Category::all()
+        'categories' => Category::all(),
+        "image1" => "kota1.png",
+        "image2" => "alam.png",
+        "image3" => "kuliner.jpg",
     ]);
 });
 
@@ -65,3 +68,12 @@ Route::get('/categories/{category:slug}', function (Category $category) {
 });
 
 Route::get('/login', [LoginController::class, 'index']);
+Route::post('/login', [LoginController::class, 'authenticate']);
+
+Route::get('/dashboard', function() {
+    return view('dashboard.index');
+});
+
+// Route::get('dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug']);
+Route::resource('/dashboard/posts', DashboardPostController::class);
+// ->middleware('auth');

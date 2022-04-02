@@ -1,55 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Mulish&family=Quicksand&display=swap" rel="stylesheet">
-    <!-- My Style -->
-    <link rel="stylesheet" href="/css/style.css">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
 
-    <title>Masuk</title>
-</head>
-<body>
-    <img class="wave" src="/image/wave.png">
-    <div class="container">
-        <div class="img">
-            {{-- <img src="/image/img.svg"> --}}
-        </div>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-        <div class="login-container">
-            <form >
-                {{-- <img class="avatar" src="/image/avatar.svg"> --}}
-                <h2 >M a s u k</h2>
-                <div class="input-div one">
-                    <div class="i">
-                        <i class="fas fa-user"></i>
 
-                    </div>
-                    <div>
-                        <h5 >Email</h5>
-                        <input class="input" type="text">
-                    </div>
-                </div>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
 
-                <div class="input-div two">
-                    <div class="i">
-                        <i class="fas fa-lock"></i>
+    <!-- Custom styles for this template -->
+    <link href="/css/style.css" rel="stylesheet">
 
-                    </div>
-                    <div>
-                        <h5>Password</h5>
-                        <input class="input" type="password">
-                    </div>
-                </div>
-                <p>Belum memiliki akun? <a href="#">Daftar</a></p>
-                <input type="submit" class="btn" value="login">
-            </form>
+  </head>
 
-        </div>
 
+<body class="text-center">
+
+  @if(session()->has('loginError'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ session('loginError') }}
+      <button type="button" class="btn-close" data-bs-dismis="alert" aria-label="Tutup">
+
+      </button>
     </div>
+  @endif
+
+<div class="row justify-content-center">
+  <div class="col-md-4">
+    <main class="form-signin" style="">
+      <h1 class="h3 mb-3 fw-normal text-center mt-5">MASUK</h1>
+      <form class="m-5" action="/login" method="post">
+        @csrf
+        <div class="form-floating mb-3">
+          <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="name@example.com" autofocus required value="{{ old('email') }}">
+          <label for="email">Alamat Email</label>
+          @error('email')
+            <div class="invalid-feedback">
+              {{ $message }}
+            </div>
+          @enderror
+        </div>
+        <div class="form-floating mb-4">
+          <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
+          <label for="password">Kata Sandi</label>
+        </div>
+        <button class="w-100 mb-3 btn btn-lg btn-primary" type="submit">Masuk</button>
+      </form>
+    </main>
+  </div>
+</div>
+
+
+
+
     
-</body>
+  </body>
 </html>
