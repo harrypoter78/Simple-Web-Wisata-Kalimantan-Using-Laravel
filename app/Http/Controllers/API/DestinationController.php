@@ -5,25 +5,10 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Destination;
 use Illuminate\Http\Request;
-use PhpParser\Node\Stmt\TryCatch;
-use Symfony\Contracts\Service\Attribute\Required;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
 
 class DestinationController extends Controller
 {
-    // public function __construct()
-    // {
-        //This will apply to every method inside the controller
-        //$this->middleware('user');
-
-        //This will apply only to the methods listed inside the array
-        //$this->middleware('admin', ['only' => ['store', 'update', 'destroy']]);
-
-        //This will apply only to the methods except the ones listed inside the array
-        // $this->middleware('subscribed', ['except' => ['fooAction', 'barAction']]);
-    // }
-
     /**
      * Display a listing of the resource.
      *
@@ -31,30 +16,33 @@ class DestinationController extends Controller
      */
     public function index()
     {
-        $data=Destination::all();
-        return response()->json($data);
+        $data = Destination::leftJoin('destination_category','destinations.destination_category_id','=','destination_category.destination_category_id');
+
+        $destination = $data->select([
+            'destinations.*',
+            'destination_category.destination_category_name'
+            // 'destinations.destination_id',
+            // 'destinations.destination_name',
+            // 'destinations.destination_description',
+            // 'destinations.destination_location',
+            // 'destinations.destination_day_temp',
+            // 'destinations.destination_night_temp',
+            // 'destinations.destination_rating',
+            // 'destinations.destination_category_id',
+            // 'destinations.destination_image'
+            ])
+            ->get();
+        
+        return response()->json($destination);
     }
 
-    public function alamDestination()
+    public function destinationByCategory($id)
     {
-        $data=Destination::getAlamDestination()->paginate(2);
+        $data = Destination::leftJoin('destination_category','destinations.destination_category_id','=','destination_category.destination_category_id')
+        ->select('destinations.*','destination_category.destination_category_name')
+        ->where('destinations.destination_category_id','=', $id)
+        ->get();
         return response()->json($data);
-    }
-
-    public function kotaDestination()
-    {
-        $data=Destination::getKotaDestination()->paginate(2);
-        return response()->json($data);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -65,25 +53,54 @@ class DestinationController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-        'destination_name' => 'required',
+        $fields = $request->validate([
+        'destination_name' => 'required|string',
         'destination_description' => 'required',
         'destination_location' => 'required',
         'destination_day_temp' => 'required',
         'destination_night_temp' => 'required',
         'destination_rating' => 'required|numeric',
-        'destination_image' => 'required|file|mimes:png,jpg',
-        'destination_category' => 'required',
+        'destination_category_id' => 'required',
+        'destination_image' => '',
+        'destination_image.*' => 'file|mimes:png,jpg',
         ]);
         try {
-            $filename = time().$request->file('destination_image')->getClientOriginalName();
-            $path = $request->file('destination_image')->storeAs('uploads/destination_image',$filename);
-            $validated['destination_image']=$path;
-            $response = Destination::create($validated);
+            $filepath = [];
+            $filecount = 0;
+            if($request->hasfile('destination_image'))
+            {
+                $files = $request->file('destination_image');
+                $filecount = count($files);
+
+                foreach($files as $file)
+                {
+                    $filename = $fields['destination_name'].'-DestinationImage-'.time().rand(1,1000).'.'.$file->getClientOriginalName();
+                    $filepath[] = $file->storeAs('uploads/destination_image', $filename);
+                }
+            }
+
+            //Default
+            // $filename = time().$request->file('destination_image')->getClientOriginalName();
+            // $path = $request->file('destination_image')->storeAs('uploads/destination_image',$filename);
+            // $files = $path;  
+
+            $destination_data = [
+                'destination_name' => $fields['destination_name'],
+                'destination_description' => $fields['destination_description'],
+                'destination_location' => $fields['destination_location'],
+                'destination_day_temp' => $fields['destination_day_temp'],
+                'destination_night_temp' => $fields['destination_night_temp'],
+                'destination_rating' => $fields['destination_rating'],
+                'destination_category_id' => $fields['destination_category_id'],
+                'destination_image' => $filepath,
+            ];
+
+            $response = Destination::create($destination_data);
             return response()->json([
                 'success' => true,
                 'message' => 'store success',
-                'data' => $response
+                'data' => $response,
+                'inserted_image_count' => $filecount
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -99,21 +116,14 @@ class DestinationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Destination $destination)
+    public function show($id)
     {
-        $data=$destination;
-        return response()->json($data);
-    }
+        $data = Destination::leftJoin('destination_category','destinations.destination_category_id','=','destination_category.destination_category_id')
+        ->select('destinations.*','destination_category.destination_category_name')
+        ->where('destinations.destination_id','=', $id)
+        ->get();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json($data);
     }
 
     /**
@@ -125,29 +135,39 @@ class DestinationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
+        $fields = $request->validate([
             'destination_name' => '',
             'destination_description' => '',
             'destination_location' => '',
             'destination_day_temp' => '',
             'destination_night_temp' => '',
             'destination_rating' => '',
+            'destination_category_id' => '',
             'destination_image' => '',
-            'destination_category' => '',
+            'destination_image.*' => 'file|mimes:png,jpg',
             ]);
             try {
-                $response = Destination::find($id);
-                if($request->file('destination_image')){
-                    $filename = time().$request->file('destination_image')->getClientOriginalName();
-                    $path = $request->file('destination_image')->storeAs('uploads/destination_image',$filename);
-                    $validated['destination_image']=$path;
-                    Storage::delete($response->destination_image);
+                $filecount = 0;
+                $data = Destination::find($id);
+                if($request->hasfile('destination_image')){
+                    $files = $request->file('destination_image');
+                    $filecount = count($files);
+    
+                    foreach($files as $file)
+                    {
+                        $filename = $fields['destination_name'].'-DestinationImage-'.time().rand(1,1000).'.'.$file->getClientOriginalName();
+                        $filepath[] = $file->storeAs('uploads/destination_image', $filename);
+                    }
+                    $fields['destination_image'] = $filepath;
+                    Storage::delete($data->destination_image);
                 }
-                $response->update($validated);
+
+                $data->update($fields);
                 return response()->json([
                     'success' => true,
                     'message' => 'update success',
-                    'data' => $response
+                    'data' => $data,
+                    'inserted_image_count' => $filecount
                 ]);
             } catch (\Exception $e) {
                 return response()->json([
@@ -166,9 +186,9 @@ class DestinationController extends Controller
     public function destroy($id)
     {
         try {
-            $response = Destination::find($id);
-            Storage::delete($response->destination_image);
-            $response->delete();
+            $data = Destination::find($id);
+            Storage::delete($data->destination_image);
+            $data->delete();
             return response()->json([
                 'success' => true,
                 'message' => 'delete success'
@@ -180,4 +200,17 @@ class DestinationController extends Controller
             ]);
         }
     }
+
+
+    // public function alamDestination()
+    // {
+    //     $data=Destination::getAlamDestination()->paginate(2);
+    //     return response()->json($data);
+    // }
+
+    // public function kotaDestination()
+    // {
+    //     $data=Destination::getKotaDestination()->paginate(2);
+    //     return response()->json($data);
+    // }
 }

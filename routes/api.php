@@ -4,6 +4,8 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\DestinationController;
 use App\Http\Controllers\API\UserAdminController;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\DestinationCategoryController;
+use App\Http\Controllers\API\DestinationImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,9 +29,12 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::resource('destination', DestinationController::class)->only([
     'index', 'show'
-]);;
-Route::get('/alamDestination', [DestinationController::class, 'alamDestination']);
-Route::get('/kotaDestination', [DestinationController::class, 'kotaDestination']);
+]);
+Route::get('/destinationByCategory/{id}', [DestinationController::class, 'destinationByCategory']);
+Route::resource('destinationCategory', DestinationCategoryController::class)->only([
+    'index', 'show'
+]);
+
 
 // Protected Routes for Admin
 Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
@@ -37,6 +42,9 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
         'store', 'update', 'destroy'
     ]);;
     Route::resource('user-admin', UserAdminController::class);
+    Route::resource('destinationCategory', DestinationCategoryController::class)->only([
+        'store', 'update', 'destroy'
+    ]);
 });
 
 // Protected Routes for User
