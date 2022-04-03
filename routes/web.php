@@ -3,17 +3,12 @@
 use App\Models\Post;
 use App\Models\Category;
 use function PHPSTORM_META\map;
-use Illuminate\Support\Facades\Artisan;
 
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
-<<<<<<< HEAD
 use App\Http\Controllers\DashboardPostController;
-=======
-use App\Http\Controllers\HotelController;
->>>>>>> c9548a7f7d98f377f52ee5b3512c4933bf129712
 
 /*
 |--------------------------------------------------------------------------
@@ -27,18 +22,12 @@ use App\Http\Controllers\HotelController;
 */
 
 Route::get('/', function () {
-    Artisan::call('storage:link');
     return view('home', [
         "title" => "Beranda",
         "image1" => "1.png",
         "image2" => "2.png",
-<<<<<<< HEAD
         "image3" => "3.jpeg",
         
-=======
-        "image3" => "3.png",
-
->>>>>>> c9548a7f7d98f377f52ee5b3512c4933bf129712
     ]);
 });
 
@@ -55,7 +44,7 @@ Route::get('/about', function () {
 
 
 
-Route::get('/posts', [PostController::class, 'index']);
+Route::get('/posts',[PostController::class, 'index']);
 // halaman single post
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
@@ -79,7 +68,6 @@ Route::get('/categories/{category:slug}', function (Category $category) {
 });
 
 Route::get('/login', [LoginController::class, 'index']);
-<<<<<<< HEAD
 Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::get('/dashboard', function() {
@@ -89,10 +77,3 @@ Route::get('/dashboard', function() {
 // Route::get('dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug']);
 Route::resource('/dashboard/posts', DashboardPostController::class);
 // ->middleware('auth');
-=======
-
-
-// Route Hotel
-
-Route::get('Hotel', [HotelController::class, 'index'])->name('Hotel.list-hotel');
->>>>>>> c9548a7f7d98f377f52ee5b3512c4933bf129712
