@@ -26,7 +26,7 @@
 <div class="px-4 text-center ">
     <h1 class="display-4" style="font-weight: 500; font-family: 'Mulish', sans-serif;">Travel</h1>
     <div class="col-lg-10 mx-auto">
-      <p class="lead mb-4" style="font-size: 25;font-family: 'Mulish', sans-serif; ">Halo, kami adalah Travel Company. Travel Company adalah perusahaan yang bergerak 
+      <p class="lead mb-4" style="font-size: 20;font-family: 'Mulish', sans-serif; ">Halo, kami adalah Travel Company. Travel Company adalah perusahaan yang bergerak 
         di bidang manajemen travel. Perusahaan ini berdiri sejak tahun 2021, fokus kami
         adalah memberikan pelayanan terbaik kepada pelanggan dan membuat
         Pulau Kalimantan menjadi tempat yang menarik untuk disinggahi.

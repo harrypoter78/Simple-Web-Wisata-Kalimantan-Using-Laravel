@@ -15,7 +15,7 @@
             <a class="nav-link active  {{ ($title === "Tentang")}} "style="font-size: 24; height: bold; font-family: 'Mulish', sans-serif;" href="/about">Tentang</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active  {{ ($title === "Wisata")}}" style="font-size: 24; height: bold; font-family: 'Mulish', sans-serif;"href="/categories">Wisata</a>
+            <a class="nav-link active  {{ ($title === "Wisata")}}" style="font-size: 24; height: bold; font-family: 'Mulish', sans-serif;"href="/destinationCategory">Wisata</a>
           </li>
 
           <div class ="" style="padding-left: 50">

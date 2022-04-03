@@ -25,6 +25,16 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // Public Routes
+Route::get('/', function () {
+    // Artisan::call('storage:link');
+    return view('home', [
+        "title" => "Beranda",
+        "image1" => "1.png",
+        "image2" => "2.png",
+        "image3" => "3.jpeg",
+        
+    ]);
+});
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::resource('destination', DestinationController::class)->only([

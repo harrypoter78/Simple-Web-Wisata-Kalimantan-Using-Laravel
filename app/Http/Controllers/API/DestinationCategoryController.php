@@ -17,7 +17,10 @@ class DestinationCategoryController extends Controller
     public function index()
     {
         $data=DestinationCategory::all();
-        return response()->json($data);
+        // return response()->json($data);
+        return view('categories', [
+            'title' => 'Destination Categories',
+            'data' => $data]);
     }
 
     /**
@@ -75,7 +78,7 @@ class DestinationCategoryController extends Controller
     public function update(Request $request, DestinationCategory $destinationCategory)
     {
         $fields = $request->validate([
-            'destination_category_name' => 'unique:destination_category,destination_category_name',
+            'destination_category_name' => '',
             'destination_category_image' => '',
             'destination_category_image.*' => 'file|mimes:png,jpg',
             ]);

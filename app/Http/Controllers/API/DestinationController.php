@@ -42,7 +42,11 @@ class DestinationController extends Controller
         ->select('destinations.*','destination_category.destination_category_name')
         ->where('destinations.destination_category_id','=', $id)
         ->get();
-        return response()->json($data);
+        // return response()->json($data);
+        return view('posts', [
+            'title' => 'Destination By Category',
+            'data' => $data,
+        ]);
     }
 
     /**
