@@ -18,11 +18,11 @@ class CreateDestinationsTable extends Migration
             $table->string('destination_name', 100);
             $table->text('destination_description');
             $table->string('destination_location', 500);
-            $table->string('destination_day_temp', 4);
-            $table->string('destination_night_temp', 4);
+            $table->string('destination_day_temp', 5);
+            $table->string('destination_night_temp', 5);
             $table->integer('destination_rating');
-            $table->binary('destination_image')->nullable(true);
-            $table->enum('destination_category', ['alam', 'kota']);
+            $table->longText('destination_image')->nullable(true);
+            $table->unsignedBigInteger('destination_category_id')->nullable(true);
             $table->timestamps();
         });
     }
