@@ -20,7 +20,6 @@
 </style>
 
 <body>
-<<<<<<< HEAD
 @extends('layout.main')
 @section('container')
 <main>
@@ -77,45 +76,6 @@
           </div>
         </div>
         @endforeach --}}
-=======
-  @extends('Hotel.header')
-  @section('container')
-  <main>
-
-    <section class="py-5 text-center container">
-      <div class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-          <h1 class="fw-light">Top Destinasi</h1>
-          <p class="lead text-muted">Cukup sulit untuk mencari tempat wisata saat Anda datang ke suatu tempat baru.
-            Berikut ini adalah beberapa tempat terpopuler dan lokasi wisata terbaik di Kalimantan.</p>
-        </div>
-      </div>
-    </section>
-
-    <div class="album py-5 bg-light">
-      <div class="container">
-
-        <div class="row row-cols-1 row-cols-sm-2 g-4">
-          @foreach ($categories as $category)
-          <div class="col">
-            <div class="card shadow-sm d-flex justify-content-center">
-              {{-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-                src="https://source.unsplash.com/1200x500?nature,city" role="img" aria-label="Placeholder: Thumbnail"
-                preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                  dy=".3em">Thumbnail</text>
-              </svg> --}}
-              <img src="https://source.unsplash.com/1200x500?mountain,city" style="height: 430; color-img">
-              <div class="card-img-overlay d-flex align-items-center" style="background-color: rgba(0,0,0,0.5) ">
-                <p class="card-title fs-1 text-center flex-fill "><a class="text-decoration-none  text-white"
-                    href="/categories/{{ $category->slug }}" class=" "> {{ $category->name }}</a></p>
-                {{-- <p class="card-text text-white mt-0">KALIMANTAN</p> --}}
-              </div>
-            </div>
-          </div>
-          @endforeach
->>>>>>> c9548a7f7d98f377f52ee5b3512c4933bf129712
 
         </div>
       </div>

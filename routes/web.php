@@ -3,8 +3,6 @@
 use App\Models\Post;
 use App\Models\Category;
 use function PHPSTORM_META\map;
-use Illuminate\Support\Facades\Artisan;
-
 
 
 use Illuminate\Support\Facades\Route;
@@ -24,7 +22,6 @@ use App\Http\Controllers\DashboardPostController;
 */
 
 Route::get('/', function () {
-    Artisan::call('storage:link');
     return view('home', [
         "title" => "Beranda",
         "image1" => "1.png",
