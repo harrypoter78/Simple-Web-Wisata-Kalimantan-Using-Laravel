@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Destination;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
@@ -19,7 +20,7 @@ class DashboardPostController extends Controller
     public function index()
     {
         return view('dashboard.posts.index',[
-            'posts' => Post::all()
+            'posts' => Destination::all()
         ]);
     }
 
@@ -30,9 +31,9 @@ class DashboardPostController extends Controller
      */
     public function create()
     {
-        return view('dashboard.posts.create', [
-            'categories' => Category::all()
-        ]) ;
+        // return view('dashboard.posts.create', [
+        //     'categories' => Category::all()
+        // ]) ;
     }
 
     /**
@@ -56,7 +57,7 @@ class DashboardPostController extends Controller
         // $validateData['user_id'] = auth()->user()->id;
         $validateData['excerpt'] = Str::limit(strip_tags($request->body), 20, ' (...)');
 
-        Post::create($validateData);
+        Destination::create($validateData);
 
         return redirect('/dashboard/posts')->with('success', 'Berhasil menambahkan postingan');
     }
@@ -67,7 +68,7 @@ class DashboardPostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Destination $post)
     {
         // Return $post;
         return view('dashboard.posts.show',[

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Destination;
+use App\Models\DestinationCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -38,14 +39,34 @@ class DestinationController extends Controller
 
     public function destinationByCategory($id)
     {
-        $data = Destination::leftJoin('destination_category','destinations.destination_category_id','=','destination_category.destination_category_id')
-        ->select('destinations.*','destination_category.destination_category_name')
-        ->where('destinations.destination_category_id','=', $id)
-        ->get();
-        // return response()->json($data);
+        $data = Destination::leftJoin('destination_category','destinations.destination_category_id','=','destination_category.destination_category_id');
+        // ->select('destinations.destination_image');
+
+        $destination = $data->select([
+            'destinations.*',
+            // 'destinations.destination_id',
+            // 'destinations.destination_name',
+            // 'destinations.destination_description',
+            // 'destinations.destination_location',
+            // 'destinations.destination_day_temp',
+            // 'destinations.destination_night_temp',
+            // 'destinations.destination_rating',
+            // 'destinations.destination_category_id',
+            // 'destinations.created_at',
+            // 'destinations.updated_at',
+            'destination_category.destination_category_name',
+            ])
+            ->where('destinations.destination_category_id','=', $id)
+            ->get();
+        
+        // $destination_image = Destination::where('destinations.destination_id', '=', $id)->select('destinations.destination_image')->take(1)->get();
+
+
+            // return response()->json($data);
         return view('posts', [
             'title' => 'Destination By Category',
-            'data' => $data,
+            'data' => $destination,
+            // 'image' => $destination_image,
         ]);
     }
 
@@ -127,7 +148,15 @@ class DestinationController extends Controller
         ->where('destinations.destination_id','=', $id)
         ->get();
 
-        return response()->json($data);
+        $destination_category = DestinationCategory::all();
+        // error_log($data[0]->destination_name);
+
+        // return response()->json($data);
+        return view('post', [
+            'title' => "Destinasi",
+            'data' => $data[0],
+            'destination_category' => $destination_category,
+        ]);
     }
 
     /**

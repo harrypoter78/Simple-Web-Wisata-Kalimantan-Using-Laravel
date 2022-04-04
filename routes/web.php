@@ -27,6 +27,7 @@ use App\Http\Controllers\API\UserController;
 |
 */
 
+//Navigator
 Route::get('/', function () {
     Artisan::call('storage:link');
     return view('home', [
@@ -38,8 +39,6 @@ Route::get('/', function () {
     ]);
 });
 
-
-
 Route::get('/about', function () {
     return view('about', [
         "title" => "Tentang",
@@ -50,44 +49,7 @@ Route::get('/about', function () {
 });
 
 
-
-Route::get('/posts',[PostController::class, 'index']);
-// halaman single post
-Route::get('posts/{post:slug}', [PostController::class, 'show']);
-
-// Route::get('/categories', function () {
-//     return view('categories', [
-//         'title' => 'Post Categories',
-//         'categories' => Category::all(),
-//         "image1" => "kota1.png",
-//         "image2" => "alam.png",
-//         "image3" => "kuliner.jpg",
-//     ]);
-// });
-
-
-Route::get('/categories/{category:slug}', function (Category $category) {
-    return view('posts', [
-        'title' => "Post By Category :  $category->name",
-        'posts' => $category->posts->load('category'),
-        //'category' => $category->name
-    ]);
-});
-
-Route::get('/login', [LoginController::class, 'index']);
-Route::post('/login', [LoginController::class, 'authenticate']);
-
-Route::get('/dashboard', function() {
-    return view('dashboard.index');
-});
-
-// Route::get('dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug']);
-Route::resource('/dashboard/posts', DashboardPostController::class);
-// ->middleware('auth');
-
-
-
-
+//Destination
 Route::resource('destinationCategory', DestinationCategoryController::class)->only([
     'index', 'show'
 ]);
@@ -95,3 +57,18 @@ Route::resource('destination', DestinationController::class)->only([
     'index', 'show'
 ]);
 Route::get('/destinationByCategory/{id}', [DestinationController::class, 'destinationByCategory']);
+
+
+//Auth
+Route::get('/login', [LoginController::class, 'index']);
+Route::post('/login', [LoginController::class, 'authenticate']);
+
+
+//Admin
+Route::get('/dashboard', function() {
+    return view('dashboard.index');
+});
+
+// Route::get('dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug']);
+Route::resource('/dashboard/posts', DashboardPostController::class);
+// ->middleware('auth');

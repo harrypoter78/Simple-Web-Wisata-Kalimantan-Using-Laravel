@@ -25,22 +25,5 @@ class Destination extends Model
     protected $casts = [
         'destination_image' => 'array',
     ];
-
-    // static function getDestinationByCategory($id){
-    //     $return=DB::table('destinations')
-    //     ->where('destinations.destination_category_id','=', $id);
-    //     return $return;
-    // }
-
-    // static function getAlamDestination(){
-    //     $return=DB::table('destinations')
-    //     ->where('destinations.destination_category_id','=','alam');
-    //     return $return;
-    // }
-    // static function getKotaDestination(){
-    //     $return=DB::table('destinations')
-    //     ->where('destinations.destination_category_id','=','kota');
-    //     return $return;
-    // }
     
 }
