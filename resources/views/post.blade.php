@@ -46,7 +46,7 @@
       <div class="position-sticky" style="top: 2rem;">
         <div class="p-4 mb-3 rounded " style="border: 1px solid black;
         border-bottom-left-radius: 25px;">
-          <h4 class="text-decoration-none" style="font-family: 'Mulish', sans-serif">
+          <h4 class="text-decoration-none mb-3" style="font-family: 'Mulish', sans-serif">
             <a href="{{url($data->destination_location)}}" class="text-decoration-none text-black">
              <i class="bi bi-geo-alt"></i> Lihat Di Google Maps
               </a> 
