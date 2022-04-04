@@ -46,23 +46,23 @@
       <div class="position-sticky" style="top: 2rem;">
         <div class="p-4 mb-3 rounded " style="border: 1px solid black;
         border-bottom-left-radius: 25px;">
-          <h4 class="fst-italic">
-            <a href="{{url($data->destination_location)}}" class="text-decoration-none">
-              Lihat Di Google Maps
+          <h4 class="text-decoration-none" style="font-family: 'Mulish', sans-serif">
+            <a href="{{url($data->destination_location)}}" class="text-decoration-none text-black">
+             <i class="bi bi-geo-alt"></i> Lihat Di Google Maps
               </a> 
             </h4>
-          <p class="mb-0">{{  $data->destination_day_temp  }}</p>
-          <p class="mb-0">{{  $data->destination_night_temp  }}</p>
-          <p class="mb-0">{{  $data->destination_rating  }}</p>
+          <p class="mb-0"><i class="bi bi-thermometer-sun"></i>{{  $data->destination_day_temp  }}</p>
+          <p class="mb-0"><i class="bi bi-thermometer-snow"></i>{{  $data->destination_night_temp  }}</p>
+          <p class="mb-0"><i class="bi bi-star-fill"></i>{{  $data->destination_rating  }}</p>
         </div>
 
-        <div class="p-4 mb-3 rounded " style="border: 1px groove black;
+        <div class="p-4 mb-3 rounded " style=" font-family: 'Mulish', sans-serif; border: 1px groove black;
         border-bottom-left-radius: 25px;">
-          <h4 class="fst-italic">Kategori Wisata</h4>
-          <ol class="list-unstyled mb-0">
+          <h4 class=""><ins>Kategori Wisata</ins></h4>
+          <ol class="list-unstyled mb-0 ">
             @foreach ($destination_category as $category)
               <li>
-                <a href="{{url('destinationByCategory/'.$category->destination_category_id)}}" class="text-decoration-none">
+                <a href="{{url('destinationByCategory/'.$category->destination_category_id)}}" class="text-decoration-none text-black">
                   {{ $category->destination_category_name }}
                 </a>
               </li>
@@ -71,11 +71,11 @@
         </div>
 
         <div class="p-4" style="font-family: 'Mulish', sans-serif;">
-          <h4 class="fst-italic">Sosial Media</h4>
-          <ol class="list-unstyled">
-            <li><a href="#">Instagram</a></li>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">Facebook</a></li>
+          <h4 class=""><ins>Sosial Media</ins></h4>
+          <ol class="list-unstyled ">
+            <li><a href="#" class="text-decoration-none text-black">Instagram</a></li>
+            <li><a href="#" class="text-decoration-none text-black">Twitter</a></li>
+            <li><a href="#" class="text-decoration-none text-black">Facebook</a></li>
           </ol>
         </div>
       </div>
