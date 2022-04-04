@@ -14,11 +14,11 @@
           <li class="nav-item">
             <a class="nav-link active  {{ ($title === "Tentang")}} "style="font-size: 24; height: bold; font-family: 'Mulish', sans-serif;" href="/about">Tentang</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" style="padding-right: 50">
             <a class="nav-link active  {{ ($title === "Wisata")}}" style="font-size: 24; height: bold; font-family: 'Mulish', sans-serif;"href="/destinationCategory">Wisata</a>
           </li>
 
-          <div class ="" style="padding-left: 50">
+          <div class ="">
           <button type="button" class="btn btn-outline-dark "style="font-size: 24; height:bold; font-family: 'Mulish', sans-serif;" href="/login">Masuk</button>
           </div>
         </ul>

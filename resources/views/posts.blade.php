@@ -14,40 +14,39 @@
       <h1 class="display-4 fst-italic text-white">
         {{ $data[0]->destination_name }}
       </h1>
-      {{-- <p class="lead my-3" style="opacity: 70%;">{{ $data[0]->destination_description }}</p> --}}
-      <p class="lead mb-0 text-white fw-bold">Selengkapnya...</p>
+      <p class="card-text mb-3 text-white" style="opacity: 70%;">{{ Str::limit($data[0]->destination_description, 100, ' ...') }}</p>
+      <p class="lead mb-0 text-blue fw-bold" style="opacity: 70%;">Selengkapnya...</p>
     </div>
   </a>
 </div>
 
 @endif
 
-<div class="container">
 <div class="row mb-2">
   @foreach ($data->skip(1) as $post)
   <div class="col-md-6">
-    <a href="{{url('destination/'.$post->destination_id)}}" class="text-decoration-none">
-      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="font-family: 'Mulish', sans-serif;">
-        <div class="col p-4 d-flex flex-column position-static">
+    <div class="card flex-md-row mb-4 box-shadow h-md-250 bg-transparent border">
+      <div class="card-body d-flex flex-column align-items-start">
+        <a href="{{url('destinationByCategory/'.$post->destination_category_id)}}" class="text-decoration-none">
           <strong class="d-inline-block mb-2 text-success">
-            {{$post->destination_category_name }}
+            {{ $post->destination_category_name }}
           </strong>
-          <h3 class="mb-0 text-white">{{ $post->destination_name }}</h3>
-          <small class="mb-1 text-muted">{{ $post->created_at->diffForHumans(); }}</small>
-          {{-- <p class="mb-auto" style="opacity: 70%;">{{ $post->destination_description}}</p> --}}
-          <div class="stretched-link pt-5">Selengkapnya...</div>
-        </div>
-        <div class="col-auto d-none d-lg-block">
-          {{-- @foreach($image as $image) --}}
-          @foreach ($post->destination_image as $image)
-            <img class="bd-placeholder-img" width="250" height="100%" src="{{ url('storage/'.$image) }}" class="card-img-top" alt="{{ $post->destination_name }}">
-          @endforeach
-        </div>
+        </a>
+        <h4 class="mb-0">
+          <a class="text-white text-decoration-none" href="{{url('destination/'.$post->destination_id)}}">{{ $post->destination_name }}</a>
+        </h4>
+        <small class="mb-2 text-muted">{{ $post->created_at->diffForHumans(); }}</small>
+        <p class="card-text mb-auto" style="opacity: 70%;">{{ Str::limit($post->destination_description, 100, ' ...') }}</p>
+        <a href="{{url('destination/'.$post->destination_id)}}" class="text-decoration-none">Selengkapnya</a>
       </div>
-    </a>
+      <a href="{{url('destination/'.$post->destination_id)}}" class="text-decoration-none">
+        <img class="card-img-right flex-auto d-none d-md-block" alt="Thumbnail [200x250]" src="{{ url('storage/'.$post['destination_image'][0]) }}" data-holder-rendered="true" style="width: 200px; height: 250px;">
+      </a>
+    </div>
   </div>
   @endforeach
 </div>
+
 </div>
 
 @endsection
