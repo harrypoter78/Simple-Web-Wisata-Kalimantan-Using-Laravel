@@ -2,29 +2,29 @@
 @extends('dashboard.layout.main')
 
 @section('container')
-<div class="row g-5 my-3">
-    <div class="col-md-8">
-        <a href="/dashboard/posts" class="btn btn-dark mb-3"> <span data-feather="corner-down-left"></span> </a>
-
-      <article class="blog-post">
-        <h2 class="blog-post-title" style="font-family: 'Mulish', sans-serif;">{{ $post->title }}</h2>
-        <p class="blog-post-meta" style="font-family: 'Mulish', sans-serif;"> Wisata <a href="/categories/{{ $post->category->slug }}" class="text-decoration-none">{{
-            $post ->category->name }}</a> Kalimantan - <small> {{ $post->created_at->diffForHumans() }}</small></p>
-
-        {{-- <img src="https://source.unsplash.com/1200x500?mountain,city" alt="" class="img-fluid mb-3"> --}}
+<div class="row g-5">
+    <div class="col-md-8 ">
+      
+      <article class="blog-post mt-4">
+      <a href="/dashboard/posts" class="brige  mb-3"> <span data-feather="arrow-left"></span> </a>
+        <h2 class="blog-post-title mt-3" style="font-family: 'Mulish', sans-serif;">{{ $data->destination_name }}</h2>
+        <p class="blog-post-meta" style="font-family: 'Mulish', sans-serif;"> 
+          Wisata 
+          <a href="{{url('destinationByCategory/'.$data->destination_category_id)}}" class="text-decoration-none">
+            {{$data->destination_category_name }}
+            </a> 
+              Kalimantan - <small> {{ $data->created_at->diffForHumans() }}</small></p>
 
         <div id="carouselExampleControls" class="carousel slide mb-3" data-bs-ride="carousel" style="font-family: 'Mulish', sans-serif;">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="https://source.unsplash.com/1200x500?mountain,city" class="d-block w-100" alt="...">
+            <div class='carousel-inner'>
+              <?php $i=0; foreach ($data->destination_image as $row): ?>
+              <?php if ($i==0) {$set_ = 'active'; } else {$set_ = ''; } ?> 
+              <div class='carousel-item <?php echo $set_; ?>'>
+                    <img src='{{ url('storage/'.$row) }}' class='d-block w-100'>
               </div>
-              <div class="carousel-item">
-                <img src="https://source.unsplash.com/1200x500?mountain,city" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="https://source.unsplash.com/1200x500?mountain,city" class="d-block w-100" alt="...">
-              </div>
+              <?php $i++; endforeach ?>
             </div>
+
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Previous</span>
@@ -35,42 +35,49 @@
             </button>
           </div>
         
-          <div style="font-family: 'Mulish', sans-serif;">  {!! $post->body !!}</div>
-       
+          <div style="font-family: 'Mulish', sans-serif;">  {{  $data->destination_description  }}</div>
         
       </article>
 
   
     </div>
   
-    <div class="col-md-4" style="font-family: 'Mulish', sans-serif;">
-      <div class="position-sticky" style="top: 2rem;">
+    <div class="col-md-4 " style="font-family: 'Mulish', sans-serif;">
+      <div class="position-sticky mt-5" style="top: 2rem;">
         <div class="p-4 mb-3 rounded " style="border: 1px solid black;
         border-bottom-left-radius: 25px;">
-          <h4 class="fst-italic">Alamat</h4>
-          <p class="mb-0">Customize this section to tell your visitors a little bit about your publication, writers, content, or something else entirely. Totally up to you.</p>
+          <h4 class="text-decoration-none mb-3" style="font-family: 'Mulish', sans-serif">
+            <a href="{{url($data->destination_location)}}" class="text-decoration-none text-black">
+             <i class="bi bi-geo-alt"></i> Lihat Di Google Maps
+              </a> 
+            </h4>
+          <p class="mb-0"><i class="bi bi-thermometer-sun"></i>{{  $data->destination_day_temp  }}</p>
+          <p class="mb-0"><i class="bi bi-thermometer-snow"></i>{{  $data->destination_night_temp  }}</p>
+          <p class="mb-0"><i class="bi bi-star-fill"></i>{{  $data->destination_rating  }}</p>
         </div>
 
-        <div class="p-4 mb-3 rounded " style="border: 1px groove black;
+        <div class="p-4 mb-3 rounded " style=" font-family: 'Mulish', sans-serif; border: 1px groove black;
         border-bottom-left-radius: 25px;">
-          <h4 class="fst-italic">Kategori Wisata</h4>
-          <ol class="list-unstyled mb-0">
-            <li><a href="#">Kota</a></li>
-            <li><a href="#">Alam</a></li>
-            <li><a href="#">Kuliner</a></li>
+          <h4 class=""><ins>Kategori Wisata</ins></h4>
+          <ol class="list-unstyled mb-0 ">
+            @foreach ($destination_category as $category)
+              <li>
+                <a href="{{url('destinationByCategory/'.$category->destination_category_id)}}" class="text-decoration-none text-black">
+                  {{ $category->destination_category_name }}
+                </a>
+              </li>
+            @endforeach
           </ol>
         </div>
-        
-  
-  
-       <div class="p-4" style="font-family: 'Mulish', sans-serif;">
-          <h4 class="fst-italic">Sosial Media</h4>
-          <ol class="list-unstyled">
-            <li><a href="#">Instagram</a></li>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">Facebook</a></li>
+
+        <div class="p-4" style="font-family: 'Mulish', sans-serif;">
+          <h4 class=""><ins>Sosial Media</ins></h4>
+          <ol class="list-unstyled ">
+            <li><a href="#" class="text-decoration-none text-black">Instagram</a></li>
+            <li><a href="#" class="text-decoration-none text-black">Twitter</a></li>
+            <li><a href="#" class="text-decoration-none text-black">Facebook</a></li>
           </ol>
-        </div> 
+        </div>
       </div>
     </div>
 </div>

@@ -24,14 +24,16 @@
         </tr>
       </thead>
       <tbody>
-          @foreach ($posts as $post)
+          @foreach ($data as $post)
           <tr>
             <td>{{ $loop->iteration }}</td>
-            <td>{{ $post->title }}</td>
-            <td>{{ $post->category->name }}</td>
-            <td><a href="/dashboard/posts/{{ $post->slug }}" class="badge bg-info"><span data-feather="eye"></span></a>
-                <a href="/dashboard/posts/{{ $post->slug }}/edit" class="badge bg-warning"><span data-feather="edit"></span></a>
-                <form action="/dashboard/posts/{{ $post->slug }}" method="post" class="d-inline">
+            <td>{{ $post->destination_name}}</td>
+            <td>{{ $post->destination_category_id }}</td>
+            {{-- <td>{{ $post->destination_category_id->destination_category_name }}</td> --}}
+            <td>
+                <a href="/dashboard/posts/{{ $post->destination_id }}" class="badge bg-info"><span data-feather="eye"></span></a>
+                <a href="/dashboard/posts/{{ $post->destination_id }}/edit" class="badge bg-warning"><span data-feather="edit"></span></a>
+                <form action="/dashboard/posts/{{ $post->destination_id }}" method="post" class="d-inline">
                 @method('delete')
                 @csrf
                 <button class="badge bg-danger border-0"onclick="return confirm('Anda yakin ingin menghapus ini?')" ><span data-feather="x-circle"></button>

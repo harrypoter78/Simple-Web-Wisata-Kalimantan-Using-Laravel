@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DestinationCategory;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\Destination;
@@ -19,9 +20,19 @@ class DashboardPostController extends Controller
      */
     public function index()
     {
-        return view('dashboard.posts.index',[
-            'posts' => Destination::all()
-        ]);
+        // return view('dashboard.posts.index',[
+        //     'posts' => Destination::all()
+        // ]);
+
+        $data=Destination::all();
+        $destination_category = DestinationCategory::all();
+
+        return view('dashboard.posts.index', [
+            'title' => 'Destination Categories',
+            'destination_category' => $destination_category,
+            'data' => $data]);
+
+            
     }
 
     /**
@@ -31,9 +42,12 @@ class DashboardPostController extends Controller
      */
     public function create()
     {
-        // return view('dashboard.posts.create', [
-        //     'categories' => Category::all()
-        // ]) ;
+        $destination_category = DestinationCategory::all();
+
+        return view('dashboard.posts.create', [
+            'destination_category' => $destination_category
+            // 'categories' => destination_category::all()
+        ]) ;
     }
 
     /**
@@ -68,11 +82,28 @@ class DashboardPostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Destination $post)
+    // public function show(Destination $post)
+    // {
+    //     // Return $post;
+    //     return view('dashboard.posts.show',[
+    //         'post' =>$post
+    //     ]);
+    // }
+
+    public function show($id)
     {
-        // Return $post;
-        return view('dashboard.posts.show',[
-            'post' =>$post
+        $data = Destination::leftJoin('destination_category','destinations.destination_category_id','=','destination_category.destination_category_id')
+        ->select('destinations.*','destination_category.destination_category_name')
+        ->where('destinations.destination_id','=', $id)
+        ->get();
+
+        $destination_category = DestinationCategory::all();
+        // error_log($data[0]->destination_name);
+
+        // return response()->json($data);
+        return view('dashboard.posts.show', [
+            'data' => $data[0],
+            'destination_category' => $destination_category,
         ]);
     }
 
@@ -82,11 +113,14 @@ class DashboardPostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit()
     {
+
+        $data=Destination::all();
+        $destination_category = DestinationCategory::all();
         return view('dashboard.posts.edit', [
-            'post' => $post,
-            'categories' => Category::all()
+            'data' => $data,
+            'destination_category' => $destination_category,
         ]) ;
     }
 
