@@ -64,13 +64,13 @@
       </div>
 
       <div class="mb-3">
-        <label for="destination_night_temp" class="form-label">Nigh Temp</label>
+        <label for="destination_night_temp" class="form-label">Night Temp</label>
         <input type="text" class="form-control @error('destination_night_temp')
         is-invalid
         @enderror" id="destination_night_temp" name="destination_night_temp" value="{{ old('destination_night_temp') }}">
         @error('destination_night_temp')
         <div class="invalid-feedback">
-            <small>Link Maps harus diisi!!!</small>
+            <small>Night harus diisi!!!</small>
         </div>
         @enderror
       </div>
@@ -82,7 +82,7 @@
         @enderror" id="destination_rating" name="destination_rating" value="{{ old('destination_rating') }}">
         @error('destination_rating')
         <div class="invalid-feedback">
-            <small>Link Maps harus diisi!!!</small>
+            <small>Rating harus diisi!!!</small>
         </div>
         @enderror
       </div>

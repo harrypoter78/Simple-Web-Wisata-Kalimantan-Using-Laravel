@@ -64,13 +64,13 @@
       </div>
 
       <div class="mb-3">
-        <label for="destination_night_temp" class="form-label">Nigh Temp</label>
+        <label for="destination_night_temp" class="form-label">Night Temp</label>
         <input type="text" class="form-control @error('destination_night_temp')
         is-invalid
         @enderror" id="destination_night_temp" name="destination_night_temp" value="{{ old('destination_night_temp') }}">
         @error('destination_night_temp')
         <div class="invalid-feedback">
-            <small>Link Maps harus diisi!!!</small>
+            <small>Nigh Temp harus diisi!!!</small>
         </div>
         @enderror
       </div>

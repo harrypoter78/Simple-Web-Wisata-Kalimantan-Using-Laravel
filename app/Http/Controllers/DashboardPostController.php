@@ -131,7 +131,7 @@ class DashboardPostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Destination $data)
     {
         $rules = [
             'title' => 'required|max:255',
@@ -139,7 +139,7 @@ class DashboardPostController extends Controller
             'body' => 'required'
         ];
 
-        if($request->slug != $post->slug) {
+        if($request->slug != $data->slug) {
             $rules['slug'] = 'required|unique:posts';
         }
 
@@ -148,7 +148,7 @@ class DashboardPostController extends Controller
         $validateData['user_id'] = auth()->user();
         $validateData['excerpt'] = Str::limit(strip_tags($request->body), 20, ' (...)');
 
-        Post::where('id', $post->id)
+        Destination::where('id', $data->id)
             ->update($validateData);
 
         return redirect('/dashboard/posts')->with('success', 'Berhasil update postingan');

@@ -9,12 +9,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardPostController;
+use App\Http\Controllers\DashboardCategoryController;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\API\DestinationCategoryController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\DestinationController;
 use App\Http\Controllers\API\UserAdminController;
 use App\Http\Controllers\API\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -72,3 +74,5 @@ Route::get('/dashboard', function() {
 // Route::get('dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug']);
 Route::resource('/dashboard/posts', DashboardPostController::class);
 // ->middleware('auth');
+
+Route::resource('/dashboard/category', DashboardCategoryController::class);

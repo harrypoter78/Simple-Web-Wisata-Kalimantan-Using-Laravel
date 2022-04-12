@@ -1,5 +1,6 @@
 
 
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -14,6 +15,9 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@500;700&family=Quicksand:wght@700&display=swap" rel="stylesheet">
     
+    
+
+
 
     <title>Travel | {{ $title }}</title>
   </head>
