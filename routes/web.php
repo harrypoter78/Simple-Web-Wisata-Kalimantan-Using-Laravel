@@ -1,21 +1,13 @@
 <?php
 
-use App\Models\Post;
-use App\Models\Category;
-use function PHPSTORM_META\map;
-
-
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\DashboardPostController;
-use App\Http\Controllers\DashboardCategoryController;
 use Illuminate\Support\Facades\Artisan;
-use App\Http\Controllers\API\DestinationCategoryController;
-use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\DestinationController;
-use App\Http\Controllers\API\UserAdminController;
-use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\Login\AuthController;
+use App\Http\Controllers\Dashboard\DashboardPostController;
+use App\Http\Controllers\Dashboard\DasboardController;
+use App\Http\Controllers\Dashboard\DashboardCategoryController;
+use App\Http\Controllers\Destination\DestinationCategoryController;
+use App\Http\Controllers\Destination\DestinationController;
 
 
 /*
@@ -29,9 +21,12 @@ use App\Http\Controllers\API\UserController;
 |
 */
 
-//Navigator
+//Home Page
 Route::get('/', function () {
-    Artisan::call('storage:link');
+    $path = public_path('storage/uploads/');
+    if(!file_exists($path)) {
+        Artisan::call('storage:link');
+    }
     return view('home', [
         "title" => "Beranda",
         "image1" => "1.png",
@@ -41,15 +36,12 @@ Route::get('/', function () {
     ]);
 });
 
+//About Page
 Route::get('/about', function () {
     return view('about', [
         "title" => "Tentang",
-        "name" => "reza",
-        "email" => "muhammaddwiki01@gmail.com",
-        "image1" => "1.png",
     ]);
 });
-
 
 //Destination
 Route::resource('destinationCategory', DestinationCategoryController::class)->only([
@@ -60,19 +52,17 @@ Route::resource('destination', DestinationController::class)->only([
 ]);
 Route::get('/destinationByCategory/{id}', [DestinationController::class, 'destinationByCategory']);
 
-
 //Auth
-Route::get('/login', [LoginController::class, 'index']);
-Route::post('/login', [LoginController::class, 'authenticate']);
+Route::get('/login', [AuthController::class, 'loginIndex'])->name('login')->middleware('guest');
+Route::post('/login', [AuthController::class, 'loginAuth']);
+// Route::post('/register', [AuthController::class, 'register']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');;
 
-
-//Admin
-Route::get('/dashboard', function() {
-    return view('dashboard.index');
+// Protected Routes for Admin
+Route::group(['middleware' => ['auth', 'admin']], function () {
+    Route::resource('/dashboard', DasboardController::class);
+    Route::resource('/dashboard-destinasi', DashboardPostController::class);
+    Route::post('/dashboard/addpost', [DashboardPostController::class, 'store']);
+    Route::resource('/dashboard-category', DashboardCategoryController::class);
 });
 
-// Route::get('dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug']);
-Route::resource('/dashboard/posts', DashboardPostController::class);
-// ->middleware('auth');
-
-Route::resource('/dashboard/category', DashboardCategoryController::class);

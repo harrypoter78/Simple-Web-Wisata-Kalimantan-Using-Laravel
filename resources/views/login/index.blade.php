@@ -13,6 +13,9 @@
     <!-- Custom styles for this template -->
     <link href="login.css" rel="stylesheet">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
   </head>
 
 
@@ -21,9 +24,7 @@
   @if(session()->has('loginError'))
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
       {{ session('loginError') }}
-      <button type="button" class="btn-close" data-bs-dismis="alert" aria-label="Tutup">
-
-      </button>
+      <button type="button" class="btn-close" data-dismiss="alert" aria-label="Tutup"></button>
     </div>
   @endif
 
