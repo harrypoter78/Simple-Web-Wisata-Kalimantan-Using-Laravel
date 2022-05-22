@@ -1,8 +1,3 @@
-<link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/heroes/">
-
-<!-- Bootstrap core CSS -->
-<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-
 <style>
   .bd-placeholder-img {
     font-size: 1.125rem;
