@@ -1,7 +1,7 @@
 <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/heroes/">
 
 <!-- Bootstrap core CSS -->
-<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
   .bd-placeholder-img {
