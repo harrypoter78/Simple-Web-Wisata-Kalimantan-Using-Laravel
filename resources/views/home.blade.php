@@ -11,11 +11,15 @@
     <h1 class="mb-0" style="font-size: min(11vw, 150px); font-family: 'Mulish', sans-serif; text-align: center" >KALIMANTAN</h1>
     <p class="text-nowrap" style="font-size: min(4vw, 31px); font-family: 'Mulish', sans-serif;">Sungai Kunyit Laut (Kalimantan Barat)</p>
     <button type="button" class="btn btn-light px-4 py-3" style="font-size: 16; border-radius: 20px; font-weight: bold; font-family: 'Mulish', sans-serif;"> 
-      <a href="/" class="text-decoration-none text-dark text-center">Hotel</a> 
+      <a href="https://travel.rizkydharma.com/" id="no-link" class="text-decoration-none text-dark text-center">Hotel</a> 
     </button>
     <button type="button" class="btn btn-light px-3 py-3" style="font-size: 16; border-radius: 20px; font-weight: bold; font-family: 'Mulish', sans-serif;"> 
-      <a href="/destinationCategory" class="text-decoration-none text-dark text-center">Wisata</a> 
+      <a href="/destinationCategory" id="no-link" class="text-decoration-none text-dark text-center">Wisata</a> 
     </button>
   </div>
 </div>
+
+
+
+
 

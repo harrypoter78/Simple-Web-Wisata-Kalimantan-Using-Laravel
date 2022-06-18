@@ -10,7 +10,7 @@
         <h2 class="blog-post-title" style="font-family: 'Mulish', sans-serif;">{{ $data->destination_name }}</h2>
         <p class="blog-post-meta" style="font-family: 'Mulish', sans-serif;"> 
           Wisata 
-          <a href="{{url('destinationByCategory/'.$data->destination_category_id)}}" class="text-decoration-none">
+          <a href="{{url('destinationByCategory/'.$data->destination_category_id)}}" class="text-decoration-none" id="no-link">
             {{$data->destination_category_name }}
             </a> 
               Kalimantan - <small> {{ $data->created_at->diffForHumans() }}</small></p>
@@ -62,7 +62,7 @@
           <ol class="list-unstyled mb-0 ">
             @foreach ($destination_category as $category)
               <li>
-                <a href="{{url('destinationByCategory/'.$category->destination_category_id)}}" class="text-decoration-none text-black">
+                <a href="{{url('destinationByCategory/'.$category->destination_category_id)}}" class="text-decoration-none text-black" id="no-link">
                   {{ $category->destination_category_name }}
                 </a>
               </li>

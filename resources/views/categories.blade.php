@@ -34,7 +34,7 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-sm-3 g-3"  >
         @foreach ($data as $category)
         <div class="col" >
-          <a  href="{{url('destinationByCategory/'.$category->destination_category_id)}}">
+          <a  href="{{url('destinationByCategory/'.$category->destination_category_id)}}" id="no-link">
           <div class="card shadow-sm d-flex justify-content-center view overlay zoom  ">
             <img  src="{{ url('storage/'.$category->destination_category_image) }}" style="height: 430; color-img"  >
             <div class="card-img-overlay d-flex align-items-center" style="background-color: rgba(0,0,0,0.5) ">
